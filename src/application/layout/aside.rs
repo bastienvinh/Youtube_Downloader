@@ -15,10 +15,10 @@ pub fn Aside() -> impl IntoView {
 
       <nav class="flex-1 p-4">
         <ul class="space-y-2">
-          <MenuItem is_active=true icon_name="ri-download-line".to_string() content="download".to_string() />
-          <MenuItem icon_name="ri-history-line".to_string() content="history".to_string() />
-          <MenuItem icon_name="ri-bookmark-line".to_string() content="bookmarks".to_string() />
-          <MenuItem icon_name="ri-settings-3-line".to_string() content="settings".to_string() />
+          <MenuItem href="/".to_string() icon_name="ri-download-line".to_string() content="Download".to_string() />
+          <MenuItem href="/history".to_string() icon_name="ri-history-line".to_string() content="History".to_string() />
+          <MenuItem href="/bookmarks".to_string() icon_name="ri-bookmark-line".to_string() content="Bookmarks".to_string() />
+          <MenuItem href="/settings".to_string() icon_name="ri-settings-3-line".to_string() content="Settings".to_string() />
         </ul>
       </nav>
 

@@ -4,7 +4,8 @@ use wasm_bindgen::prelude::*;
 
 use leptos_router::components::*;
 use leptos_router::path;
-// use leptos_router::hooks::use_params_map;
+
+use crate::application::pages::DownloadPage;
 
 #[wasm_bindgen]
 extern "C" {
@@ -17,11 +18,13 @@ pub fn App() -> impl IntoView {
 	view! {
 		<Router>
 			<Routes fallback=|| "Not found.">
-				<Route path=path!("") view=Layout />
-				<Route path=path!("download") view=|| view! { <h1>"Download Page"</h1> } />
-				<Route path=path!("history") view=|| view! { <h1>"History Page"</h1> } />
-				<Route path=path!("bookmarks") view=|| view! { <h1>"Bookmarks Page"</h1> } />
-				<Route path=path!("settings") view=|| view! { <h1>"Settings Page"</h1> } />
+				<ParentRoute path=path!("") view=Layout>
+					<Route path=path!("") view=DownloadPage />
+					<Route path=path!("download") view=DownloadPage />
+					<Route path=path!("history") view=|| view! { <h1>"History Page"</h1> } />
+					<Route path=path!("bookmarks") view=|| view! { <h1>"Bookmarks Page"</h1> } />
+					<Route path=path!("settings") view=|| view! { <h1>"Settings Page"</h1> } />
+				</ParentRoute>
 			</Routes>
 		</Router>
 	}
