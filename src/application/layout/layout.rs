@@ -5,7 +5,7 @@ use crate::application::layout::aside::Aside;
 pub fn Layout() -> impl IntoView {
   view! {
     <div class="flex min-h-screen">
-    <Aside />
+      <Aside />
     </div>
   }
 }
