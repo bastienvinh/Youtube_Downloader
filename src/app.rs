@@ -22,7 +22,7 @@ pub fn App() -> impl IntoView {
 					<Route path=path!("") view=DownloadPage />
 					<Route path=path!("download") view=DownloadPage />
 					<Route path=path!("history") view=|| view! { <h1>"History Page"</h1> } />
-					<Route path=path!("bookmarks") view=|| view! { <h1>"Bookmarks Page"</h1> } />
+					<Route path=path!("saved") view=|| view! { <h1>"Saved Page"</h1> } />
 					<Route path=path!("settings") view=|| view! { <h1>"Settings Page"</h1> } />
 				</ParentRoute>
 			</Routes>

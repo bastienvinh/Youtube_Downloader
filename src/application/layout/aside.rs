@@ -17,7 +17,7 @@ pub fn Aside() -> impl IntoView {
         <ul class="space-y-2">
           <MenuItem href="/".to_string() icon_name="ri-download-line".to_string() content="Download".to_string() />
           <MenuItem href="/history".to_string() icon_name="ri-history-line".to_string() content="History".to_string() />
-          <MenuItem href="/bookmarks".to_string() icon_name="ri-bookmark-line".to_string() content="Bookmarks".to_string() />
+          <MenuItem href="/saved".to_string() icon_name="ri-star-line".to_string() content="Saved".to_string() />
           <MenuItem href="/settings".to_string() icon_name="ri-settings-3-line".to_string() content="Settings".to_string() />
         </ul>
       </nav>

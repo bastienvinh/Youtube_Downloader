@@ -1,43 +1,42 @@
-use leptos::prelude::*;
+use leptos::{ev::SubmitEvent, leptos_dom::logging::console_log, prelude::*};
 
 #[component]
 pub fn DownloadPage() -> impl IntoView {
-  let (downloads, set_downloads) = create_signal(Vec::<String>::new());
+
+  let (links_entered, set_links_entered) = signal(String::from("lala"));
+
+  let on_submit = move |ev: SubmitEvent| {
+    ev.prevent_default();
+    
+  };
 
   view! {
     <main class="flex-1 flex items-center justify-center p-8">
       <div class="w-full max-w-2xl">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-gray-900 mb-3">Download YouTube Videos</h2>
-          <p class="text-gray-600 text-lg">Paste your YouTube URL below and click download</p>
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold text-gray-800 mb-3">"Download YouTube Videos"</h1>
+          <p class="text-gray-600">"Paste one or more YouTube URLs below (one per line)"</p>
         </div>
-
-        <div class="bg-white rounded-2xl shadow-lg p-8">
-          <div class="space-y-6">
-            <div>
-              <label for="youtube-url" class="block text-sm font-medium text-gray-700 mb-2">
-                YouTube URL
-              </label>
-              <input
-                type="text"
-                id="youtube-url"
-                placeholder="https://youtu.be/dQw4w9WgXcQ"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
-              />
-            </div>
-
-            <button class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-md hover:shadow-lg">
-              <i class="ri-download-line text-xl"></i>
-              <span>Download Video</span>
-            </button>
-          </div>
-
-          <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-            <p class="text-sm text-blue-800">
-              <strong>Tip:</strong> Supports various video qualities and formats. The download will start automatically once processed.
-            </p>
-          </div>
-        </div>
+        
+        <form on:submit=on_submit class="bg-white rounded-2xl shadow-xl p-8">
+          <textarea
+            name="youtube_links"
+            placeholder="https://youtu.be/dQw4w9WgXcQ&#10\nhttps://youtu.be/example123&#10\nhttps://youtu.be/another456"
+            class="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-xl focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all resize-none"
+            rows="8"
+            prop:value=links_entered
+            on:input:target=move |ev| set_links_entered.set(ev.target().value())
+          ></textarea>
+          
+          <button class="w-full mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg shadow-lg hover:shadow-xl">
+            <i class="ri-download-line text-2xl"></i>
+            <span>"Download Videos"</span>
+          </button>
+          
+          <p class="text-sm text-gray-500 text-center mt-4">
+            "Supports YouTube, YouTube Shorts, and YouTube Music links"
+          </p>
+        </form>
       </div>
     </main>
   }
