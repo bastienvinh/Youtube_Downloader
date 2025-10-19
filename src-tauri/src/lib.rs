@@ -1,7 +1,9 @@
 #[tauri::command]
-async fn download_youtube_videos(links: Vec<String>) -> Result<(), String> {
+fn download_youtube_videos(links: Vec<String>) {
 	println!("Downloading videos from links: {:?}", links);
-	Ok(())
+	
+	// You can now use async/await with bollard and tokio here
+	// Example: interact with Docker API
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
