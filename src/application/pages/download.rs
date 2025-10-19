@@ -1,13 +1,34 @@
-use leptos::{ev::SubmitEvent, leptos_dom::logging::console_log, prelude::*};
+use leptos::{ev::SubmitEvent, prelude::*, reactive::spawn_local};
+use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
+
+#[wasm_bindgen]
+extern "C" {
+	#[wasm_bindgen(js_namespace = ["window", "__TAURI__", "core"])]
+	async fn invoke(cmd: &str, args: JsValue) -> JsValue;
+}
 
 #[component]
 pub fn DownloadPage() -> impl IntoView {
 
   let (links_entered, set_links_entered) = signal(String::from("lala"));
 
+  // Submit youtube link
   let on_submit = move |ev: SubmitEvent| {
     ev.prevent_default();
+
+    // Creating my link of youtube links
+    let links = links_entered
+      .get()
+      .split("\n")
+      .map(|s| s.trim().to_string())
+      .collect::<Vec<String>>();
     
+    spawn_local(async move {
+      let args = serde_wasm_bindgen::to_value(&serde_json::json!({
+        "links": links
+      })).unwrap_or(JsValue::NULL);
+      invoke("download_youtube_videos", args).await;
+    });
   };
 
   view! {
